@@ -22,6 +22,3 @@ for (sys in c('asrs','nrc','rail','phmsa')) {
 }
 
 write.csv(nar_df,'eid_eventText.csv')
-
-nar_df <- nar_df |> 
-  mutate(dupe = duplicated(event_text))

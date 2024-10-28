@@ -8,7 +8,6 @@ default:
   personal_values_dict: 'personal_values.dic'
   wwpb_wellbeing: 'wwbp_wellbeing.csv'
 calculon:
-  calculon:
   db_name: 'nar_clim'
   dbUser: 'postgres'
   dbPW: 'LetMeIn21'

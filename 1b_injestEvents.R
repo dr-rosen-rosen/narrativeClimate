@@ -46,6 +46,9 @@ get_and_clean_ASRS <- function(asrs.files) {
     mutate(
       acn = if_else(r == 1, acn, paste0(acn,'_',r))
     ) |> select(-r)
+  
+  dfs <- dfs |>
+    distinct(cmbd_narrative, .keep_all = TRUE)
   return(dfs)
 }
 
@@ -58,6 +61,7 @@ get_and_clean_NRC_events <- function(f) {
       event_date2 = lubridate::mdy(event_date),
       notification_date2 = lubridate::mdy(notification_date),
       event_text = tolower(event_text),
+      tot_wc = stringr::str_count(event_text, '\\w+'),
       facility = case_match(tolower(facility),
                             'columbia generating statiregion:' ~ 'columbia generating station',
                             'davis-besse'~ 'davis besse',
@@ -69,6 +73,8 @@ get_and_clean_NRC_events <- function(f) {
                             .default = tolower(facility))  
     ) |>
     select(-X)
+  df <- df |>
+    distinct(event_text, .keep_all = TRUE)
   return(df)
 }
 
@@ -77,7 +83,8 @@ get_and_clean_rail_events <- function(f) {
   df <- df |>
     mutate(
       Narrative = str_replace_all(Narrative,'NoneNone',''),
-      Narrative = str_remove(Narrative,'None$')
+      Narrative = str_remove(Narrative,'None$'),
+      tot_wc = stringr::str_count(Narrative, '\\w+')
     ) |>
     filter(
       !is.na(Narrative), 
@@ -90,6 +97,8 @@ get_and_clean_rail_events <- function(f) {
     mutate(
       Accident.Number = if_else(r == 1, Accident.Number, paste0(Accident.Number,'_',r))
     ) |> select(-r)
+  df <- df |>
+    distinct(Narrative, .keep_all = TRUE)
   return(df)
 }
 
@@ -100,6 +109,11 @@ get_and_clean_phmsa <- function(f) {
       !is.na(cmbd_narrative), 
       cmbd_narrative != '', 
       utf8::utf8_valid(cmbd_narrative))
+  df <- df |>
+    distinct(cmbd_narrative, .keep_all = TRUE) |>
+    mutate(
+      tot_wc = stringr::str_count(cmbd_narrative, '\\w+')
+    )
   return(df)
 }
 

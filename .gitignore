@@ -2,7 +2,7 @@
 .Rhistory
 .Rapp.history
 *.csv
-
+.DS_Store
 # Session Data files
 .RData
 .RDataTmp
