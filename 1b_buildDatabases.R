@@ -19,6 +19,16 @@ if (!DBI::dbExistsTable(con,'link_table')) {
   create_link_table(con = con)
 }
 
+create_survey_table <- function(con){
+  q <- DBI::sqlInterpolate(
+    conn = con, 
+    "CREATE TABLE IF NOT EXISTS survey_tools (sid uuid PRIMARY KEY DEFAULT gen_random_uuid(), survey text, reference text);")
+  DBI::dbExecute(conn = con, q)
+}
+if (!DBI::dbExistsTable(con,'survey_tools')) {
+  create_survey_table(con = con)
+}
+
 insert_new_column <- function(con, table, column_name, column_type, vec_len) {
   print(glue::glue("Attempting to insert {column_name} as {column_type}"))
   column_type <- if_else(is.na(vec_len), column_type, paste0('vector(',vec_len,')'))
