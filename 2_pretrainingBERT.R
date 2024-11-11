@@ -21,4 +21,9 @@ for (sys in c('asrs','nrc','rail','phmsa')) {
   }
 }
 
+nar_df <- nar_df |>
+  mutate(event_text = tolower(event_text)) |>
+  filter(
+    stringr::str_count(event_text, '\\w+') >= 20
+  )
 write.csv(nar_df,'eid_eventText.csv')
