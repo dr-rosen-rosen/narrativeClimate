@@ -7,12 +7,14 @@ default:
   uncertainty_dict: 'Uncertainty_Business.dic'
   personal_values_dict: 'personal_values.dic'
   wwpb_wellbeing: 'wwbp_wellbeing.csv'
+  survey_items: 'crossIndustrySafetyClimate.xlsx'
 calculon:
   db_name: 'nar_clim'
   dbUser: 'postgres'
   dbPW: 'LetMeIn21'
   db_host: '192.168.7.212'
   dbPort: 5424
+  survey_item_path: '/Volumes/calculon/event_reporting/survey_items'
   nrc_data_path: '/Volumes/calculon/event_reporting/nrc'
   asrs_data_path: '/Volumes/calculon/event_reporting/aviation/ASRS_data'
   rail_data_path: '/Volumes/calculon/event_reporting/rail_safety_reports'

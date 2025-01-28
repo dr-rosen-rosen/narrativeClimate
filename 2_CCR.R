@@ -27,7 +27,7 @@ get_sim_items <- function(var_stem, df) {
 ########### Get similarities ----
 CCR::ccr_setup()
 ccr_loadings <- CCR::ccr_wrapper(events_df,'Narrative_merged',climate_items,'item')
-# write.csv(ccr_loadings,'ccr_loadings.csv')
+write.csv(ccr_loadings,'ccr_loadings.csv')
 ccr_event_scores <- ccr_loadings |>
   select(PRIMARY_LOC_NAME, HARM_SCORE, starts_with('sim_item_')) |>
   mutate(
