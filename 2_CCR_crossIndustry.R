@@ -35,7 +35,7 @@ climate_items <- readxl::read_excel(
     sim_item = glue::glue('sim_item_{num}')) 
 ########### Get event loadings ----
 CCR::ccr_setup()
-ccr_loadings <- CCR::ccr_wrapper(nar_df,'event_text',climate_items,'item')
+ccr_loadings <- CCR::ccr_wrapper(nar_df,'event_text',climate_items,'item', model = "all-MiniLM-L6-v2")
 # write_csv(ccr_loadings, 'ccr_loadings_crossIndustry.csv')
 # ccr_loadings <- read_csv('ccr_loadings_crossIndustry.csv')
 

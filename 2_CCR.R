@@ -28,6 +28,7 @@ get_sim_items <- function(var_stem, df) {
 CCR::ccr_setup()
 ccr_loadings <- CCR::ccr_wrapper(events_df,'Narrative_merged',climate_items,'item')
 write.csv(ccr_loadings,'ccr_loadings.csv')
+ccr_loadings <- read.csv('ccr_loadings.csv')
 ccr_event_scores <- ccr_loadings |>
   select(PRIMARY_LOC_NAME, HARM_SCORE, starts_with('sim_item_')) |>
   mutate(
@@ -50,6 +51,7 @@ unique(cmbd_event_df$PRIMARY_LOC_NAME)
 names(cmbd_event_df)
 
 skimr::skim(cmbd_event_df)
+cmbd_event_df <- cmbd_event_df |>
   mutate(
     PRIMARY_LOC_NAME = factor(PRIMARY_LOC_NAME),
     TC_z = datawizard::standardise(TC),

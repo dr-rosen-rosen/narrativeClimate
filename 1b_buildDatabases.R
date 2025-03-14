@@ -29,6 +29,9 @@ if (!DBI::dbExistsTable(con,'survey_tools')) {
   create_survey_table(con = con)
 }
 
+# make a survey_items table
+# to include link t sid, item_id, item (text), item embedding, reverse score, subdimension
+
 insert_new_column <- function(con, table, column_name, column_type, vec_len) {
   print(glue::glue("Attempting to insert {column_name} as {column_type}"))
   column_type <- if_else(is.na(vec_len), column_type, paste0('vector(',vec_len,')'))

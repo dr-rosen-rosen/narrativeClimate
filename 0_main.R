@@ -7,6 +7,8 @@ library(here)
 Sys.setenv(R_CONFIG_ACTIVE = 'calculon')
 config <- config::get()
 # source('1_funcs.R')
+source('1b_buildDatabases.R')
+source('1b_injestEvents.R')
 ########### Read in raw events ----
 ########### cleaning is different by source
 source('1b_buildDatabases.R')
